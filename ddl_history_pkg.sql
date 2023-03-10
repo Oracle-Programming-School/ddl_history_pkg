@@ -1,4 +1,4 @@
-CREATE OR REPLACE PACKAGE PROJECT_ADMIN.ddl_history_pkg AS
+CREATE OR REPLACE PACKAGE ddl_history_pkg AS
   
 -- adds a new entry to the DDL history table
   PROCEDURE add_ddl_history(p_object_type VARCHAR2, p_object_name VARCHAR2);
@@ -10,7 +10,7 @@ END ddl_history_pkg;
 /
 
 
-CREATE OR REPLACE PACKAGE BODY PROJECT_ADMIN.ddl_history_pkg AS
+CREATE OR REPLACE PACKAGE BODY ddl_history_pkg AS
 
 PROCEDURE add_ddl_history(p_object_type VARCHAR2, p_object_name VARCHAR2) IS
   l_ddl_text CLOB;
@@ -37,6 +37,8 @@ BEGIN
   -- store the DDL in the ddl_history table
   INSERT INTO ddl_history (object_type, object_name, ddl_text, database_name, object_version) 
     VALUES (p_object_type, p_object_name, l_ddl_text, l_database_name, l_object_version);
+	
+	COMMIT;
 END add_ddl_history;
 
 
@@ -58,6 +60,9 @@ END add_ddl_history;
         AND object_name = UPPER(p_object_name) 
         AND created_at < l_date;
     END IF;
+	
+	COMMIT;
+	
   END truncate_history;
 
 END ddl_history_pkg;

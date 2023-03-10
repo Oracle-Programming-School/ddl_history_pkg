@@ -1,0 +1,16 @@
+--Backup of Multiple Objects
+BEGIN
+   FOR LDX
+      IN (SELECT *
+            FROM USER_OBJECTS
+           WHERE OBJECT_TYPE IN
+                    ('TABLE',
+                     'INDEX',
+                     'VIEW',
+                     'PACKAGE',
+                     'PROCEDURE',
+                     'FUNCTION'))
+   LOOP
+      DDL_HISTORY_PKG.ADD_DDL_HISTORY (LDX.OBJECT_TYPE, LDX.OBJECT_NAME);
+   END LOOP;
+END;
