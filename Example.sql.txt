@@ -14,3 +14,9 @@ BEGIN
       DDL_HISTORY_PKG.ADD_DDL_HISTORY (LDX.OBJECT_TYPE, LDX.OBJECT_NAME);
    END LOOP;
 END;
+
+
+--- Query
+
+select OBJECT_TYPE||'_'||OBJECT_name||'_'||object_version filename , ddl_text
+from ddl_history
