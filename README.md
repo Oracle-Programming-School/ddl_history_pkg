@@ -10,6 +10,6 @@ Protection against data loss.
 Confidence in changes
 
 
-To retrieve historical records from the ddl_history table, simply query the table.
+##To retrieve historical records from the ddl_history table, simply query the table.
 
 ![Example](https://miro.medium.com/v2/resize:fit:720/format:webp/1*8a-ErCQKi-2tJf_QKoT3TA.png)
